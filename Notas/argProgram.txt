@@ -1,0 +1,186 @@
+--GOBSTONE--
+Mover(Norte,Sur,Este,Oeste)
+Poner(Rojo,Negro,Azul,Verde)
+Sacar(Rojo,Negro,Azul,Verde)
+IrAlBorde(Norte,Sur,etc)
+nroBolitas(color): Devuelve la cant de bolitas que hay en la casilla actual
+hayBolitas(color): Devuelve un booleano sobre la casilla actual
+puedeMover(direccion): Devuelve un booleano si se puede mover
+
+-Comienza con un:
+program{}
+-Funciones:
+procedure NombreDeLaFuncion(parametro){ funcion }
+program { NombreDeLaFuncion(parametro) }
+function nombreDeLaFuncion(){ return }
+
+repeat(n°){ proceso }
+if(condicion){} else {}
+
+-dudoso: MoverN(cant,direccion), PonerN(cant,color), SacarN(cant,color)
+-aritmetica: +,-,*,div
+-negación: not = not hayBolitas(color), not puedeMover(direccion)
+-otros operadores: || or, && and
+-uso del opuesto: Mover(opuesto(Direccion))
+-otros: Mover(siguiente(direccion)), Mover(previo(direccion))
+
+--JAVASCRIPT--
+-Funciones, procedimientos y programas:
+function nombreDeLaFuncion(parametro){ return o sin return }
+
+-Variables: let nombreVariable = valor
+-Listas: let nombreLista = ['valor1', 'valor2', 'valor3']
+agregar(nombreLista, 'objeto'): agregar elementos a la lista
+remover(nombreLista, 'objeto')
+posicion(nombreLista, 'valor2'): devuelve 1
+nombreLista[2]: devuelve 'valor3'
+-Registro: let nombreVariable = {nombre:"Nombre de la variable", locacion:"Locacion de la variable", extension:150}
+nombreVariable.nombre: devuelve "Nombre de la variable"
+nombreVariable.nombre = "Nuevo nombre" : Cambiamos el nombre de la variable
+-compuestos: let nombreVariable = {ingredientes:['var1','var2','var3'], nombre:"nombre de la variable"}
+let nombreLista = [{mes:"julio", ganancia:50}, {mes:"agosto",ganancia:120}]
+total = nombreLista[0].ganancia + nombreLista[1].ganancia
+mejor: for (let balance of nombreLista) {sumatoria = sumatoria + balance.ganancia}
+
+for(let variable of nombreLista){ cosa a hacer con 'variable'}
+if(condicion){} else if {} else {}
+
+-aritmetica: +,-,*,/
+-otros:  Math.round,Math.min,Math.max
+-operadores:  ===, !==, <=, >=, >, <, ||, &&, !true
+-tambien: +=, -=, *=
+longitud(string): devuelve el n° de caracteres del string
+longitud(lista): devuelve la longitud de la lista
+comienzaCon(sting1,string2): compara si comienza con
+imprimir(string)
+
+--RUBY--
+-Constructor:
+module NombreConstructor
+end
+-Metodos:
+def self.nombre_metodo!
+end
+-Getter: Tienen el mismo nombre que el atributo y devuelve su valor
+@energia = 10
+def self.energia
+ @energia
+end
+-Condicional
+if self.primer_condicional?
+elsif self.segundo_condicional?
+else
+end
+-Repetidor:
+3.times{self.nombre_del_metodo!}
+-Variables:
+nombre_variable = "variable"
+-Modificadores
+.size() Devuelve la cant de caracteres
+.upcase() Devuelve el string en mayusculas
+.equal? Compara 2 strings: var1.equal? var2
+-Lista:
+@nombre_lista = [objeto1, objeto2, objeto3]
+nombre_lista.push <var> = agrega elemento a la lista
+nombre_lista.delete <var> = lo borra
+nombre_lista.include? <var> = devuelve un booleano
+nombre_lista.size = devuelve la cant de elementos en la lista
+nombre_lista.to_set = convierte la lista en un set, no contiene orden ni repetidos
+-Parametros:
+nombre_del_parametro = proc {|argumento| Pepita.jugar!(argumento)}
+para llamarlo: nombre_del_parametro.call(argumento)
+nueva_lista = @lista.select {|elementos|  elementos.metodo?} 
+//devuelve una nueva lista que cumpla las condiciones
+@lista.find //solo devuelve 1 elemento, nill es ninguno
+lista.all? {|parametro| parametro.condicional?} //todos tienen que cumplir la condicion
+lista.any? {|parametro| parametro.condicional?} //alguno que cumpla la condicion 
+nueva_lista = lista_vieja.map {|elemento| elemento.parametro} //crea una nueva lista con los parametros
+lista.count {|elemento| elemento.condicion?} //cuenta cuantos cumplen la condicion
+lista.sum {|elemento| elemento.cantidad_de_algo} // suma la cantidad de algo de todos los elementos de la lista
+@lista.each {|elemento| elemento.sumar!(num)} //suma num a cada elemento de la lista 
+
+-operadores: +,-,*,/, +=. -=, *=, <, >, ==
+.abs: devuelve el valor absoluto ej: (-17).abs = 17
+
+ejemplo:
+module Pepita
+@energia = 100  //inicialización del atributo
+@ciudad = Algo
+ def self.volar_en_circulos!
+  @energia = @energia - 10
+ end
+ def self.volar_hacia! (parametro)
+  @ciudad = parametro
+ end
+ def self.energia
+  @energia //devuelve por pantalla la cant de energia
+ end
+ def self.debil? //devuelve un booleano
+  @energia < 10
+ end
+ def self.comer_alpiste!(cant)
+  @energia += cant * 10
+ end
+ def self.mejorar!
+  if self.debil?
+   self.comer_alpiste!(10)
+  end
+ end
+end
+
+-Tambien dentro de un objeto podemos dar ordenes a otro, por ej:
+module Pachorra
+ def self.entrenar_ave!
+  10.times {Pepita.volar_en_circulos!}
+ end
+end
+-o tambien
+module Pachorra
+ def self.firmar_contrato! (ave)
+  @aveEntrenada = ave
+ end
+ def self.entrenar_ave!
+  10.times{@aveEntrenada.volar_en_circulos!}
+ end
+end
+
+-otro modo de setear un atributo
+module Nombre
+ def self.algo
+  100  //solo con esto ya seteamos que el algo del modulo va a ser 100
+ end
+end
+
+-Clases: se escriben de la siguiente manera
+class Nombre
+ def initialize //se incluye un inicializador y los atributos no se ponen sueltos
+  @algo = 10
+ end
+ def hacer_algo! //no se usa el self.
+  @algo -= 1
+ end
+ def descansar!(horas)
+  @algo += horas
+ end
+end
+-Crear objetos con relacion a la clase:
+nuevo_algo1 = Nombre.new
+nuevo_algo2 = Nombre.new
+-O armar una lista de objetos:
+muchos_algo = []
+20.times {muchos_algo.push(Nombre.new)}
+-Inicializar dependiendo parametro:
+def initialize (num)
+ @algo = num
+end
+nuevo_algo_numerado = Nombre.new 20
+-Herencia:
+class Ave
+ def volar!
+  @energia -=20
+ end
+end
+class Condor < Ave // condor esta heredando propiedades de ave
+Tambien podemos utilizar el metodo de super clase con super
+ super + " estudiantes"
+Otra opcion es crear metodos con el mismo nombre y se pisarán por jerarquia

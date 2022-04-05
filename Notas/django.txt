@@ -1,0 +1,29 @@
+crear un proyecto: django-admin startproject <nombre del proyecto>
+-data sobre migrate: manage.py help
+-crear la base de datos y poner en funcionamiento el proyecto: python manage.py migrate
+-arrancar servidor: python manage.py runserver
+-crear aplicacion: python manage.py startapp <nombre del proyecto>
+-chequear si hay errores en la app: python manage.py check <nombre del proyecto>
+-crear las bases de datos: python manage.py makemigrations
+-traduce django a sql: python manage.py sqlmigrate <nombre del proyecto> <numero de la migracion>
+-crear las tablas en la bbdd: python manage.py migrate
+-abrir el shell: python manage.py shell:
+	>>> from gestionPedidos.models import Articulos
+	>>> art=Articulos(nombre='mesa', seccion='decoracion', precio=90)
+	>>> art.save()
+	>>> art3=Articulos.objects.create(nombre='taladro', seccion='ferreteria', precio=65)
+	>>> art.precio=95
+	>>> art5.objects.get(id=2)
+	>>> art5.delete()
+
+instalar el psycopg2 para conectar postgresql con django: pip install psycopg2
+
+>>> Articulos.objects.filter(seccion="decoracion")  //devuelve una listacon los id que representa ese grupo
+Agregando al models.py la funcion __str__(self): se puede hacer que devuelva un string mas bonito
+En shell < = __lte: y > = __gte
+>>>Articulos.objects.filter(precio__gte=75).order_by('precio'): devuelve los valores ordenados
+
+-PANEL DE ADMINISTRACIÓN
+python manage.py createsuperuser: para crear el super usuario
+Una vez hecho esto ya podemos loggear al /admin
+El ModelAdmin permite ver información de los registros

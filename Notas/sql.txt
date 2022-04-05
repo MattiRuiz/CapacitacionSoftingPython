@@ -1,0 +1,143 @@
+-Mostrar base de datos: show databases;
+-Crear base de datos: create database administracion;
+-Eliminar base de datos: drop database administracion;
+-Mostrar todas las tablas: show tables;
+
+-estructura de creacion de base de datos:
+create table usuarios {
+	nombre varchar(50)
+	clave varchar(20)
+};
+
+-Borrar base de datos si existe: drop table if exists usuarios;
+
+-Insertar datos:
+Insert into usuarios(nombre,clave) values ("MarioPereyra","Marito");
+
+-Mostrar datos: select nombre,clave from usuarios;
+-Ver campos de la base de datos: describe usuarios;
+
+-Tipos de variables basicas: varchar, integer, float
+
+-Recuperacion de datos: En una tabla con titulo, autor, editorial, precio, cant.
+select * from libros; muestra todo
+select editorial, cantidad from libros; muestra solo esos datos
+select titulo,precio from libros;
+
+-Recuperacion de registros especificos:
+select nombre,clave from usuarios; muestra todo
+select nombre, clave from usuarios where clave="bocajuniors";
+select nombre,clave from usuarios where nombre="Leonardo"
+
+-Operadores relacionales:
+select titulo,autor,editorial,precio from libros where precio>30;
+
+-Borrado de registros:
+delete from usuarios; borra TODOS los usuarios;
+delete from usuarios where nombre="Leandro";
+delete from usuarios where clave="River";
+
+-Modificacion de registro:
+update usuarios set clave="RealMadrid"; Le estamos poniendo a TODOS los usuarios la clave RealMadrid
+update usuarios set nombre="GustavoGarcia" where nombre="Gustavo";
+update usuarios set nombre="MarceloDuarte" clave="Marce" where nombre="Marcelo";
+
+-Clave primaria, un dato caracteristico que no se puede repetir, la estructura es:
+create table usuarios {
+nombre varchar(30),
+clave varchar(20),
+primary key(nombre)
+};
+
+-Campo entero con autoincremento, campo que va autoincrementandose mientras sumamos campos:
+create table libros {
+codigo int auto_increment,
+titulo varchar(50),
+autor varchar(50)
+primary key (codigo)
+};
+
+-Otro modo de borrado de datos, comando truncate table:
+truncate table libros; borra toda la tabla, se diferencia en que reinicia el contador que autoincrementa, delete no. truncate es más rapido
+
+-Valores null, si permite valores nulos, sino se aclara que no puede ser nulo:
+create table libros{
+codigo int auto_increment,
+titulo varchar(50) not null,
+autor varchar(50),
+editorial varchar(50) not null,
+precio float null, (no hace falta aclarar los nulos, pero se puede)
+};
+
+-Valores numéricos sin signo, unsigned, no permite valores negativos:
+create table libros{
+titulo varchar(50),
+precio float unsigned,
+cantidad integer unsigned
+};
+
+-Tipos de datos numericos:
+integer: con o sin signos
+float, numero decimales
+smallInt(x)
+tinyint(x)
+bigint(x)
+bool
+
+-Datos fechas y horas:
+date: YYYY-MM-DD ej: "2022-02-14"
+datetime: YYYY-MM-DD HH:MM:SS ej: "2022-02-14 16:15:00"
+time: HH:MM:SS
+year(2) y year(4): YYYY o YY
+
+-Para tener en cuenta (1): Se puede aplicar un default a las celdas que se ingresa si no ingresamos ningun dato.
+autor varchar(30) default "Desconocido";
+
+-Atributo zerofill, si el valor ingresado es menor a la cantidad de caracteres aceptados rellena con ceros a la izquierda, por ej:
+codigo int(6) zerofill auto_increment,
+cantidad smallint zerofill,
+
+-Columna calculada, se realiza a traves de un calculo y muestra los resultados, no se crea en la tabla sino que solo se utiliza para mostrar
+select titulo,precio,cantidad, precio*cantidad from libros;
+select titulo, precio, precio/0.1, precio-(precio*0.1) from libros;
+
+-clausula order by del select, sirve para mostrar las tablas ordenadas segun diferentes criterios.
+select codigo,titulo,autor from libros order by titulo;
+select codigo,titulo, autor,editorial from libros order by titulo,editorial;
+select codigo,titulo,autor,editorial from libros order by titulo asc, editorial desc;
+
+-Operadores lógicos (and- or - not), se utilizan de la sig manera:
+select * from libros where (autor="Borges") and (precio>=20);
+select * from libros where (autor="Borges") or (editorial="Planeta");
+
+-Otros operadores relacionales (between - in)
+select * from libros where precio between 20 and 40;
+select * from libros where autor in("Borges", "Paenza");
+select * from libros where autor not in ("Borges", "Paenza");
+
+-Busqueda de patrones (like y not like), para busquedas sin la necesidad de que contengan similares contenidos (por ej, "Borges", "J.L. Borges", son diferentes campos pero queremos que aparezcan en la misma busqueda)
+select * from libros where autor like "%Borges%"; Donde % funciona como comodín
+select * from libros where titulo like "A%"; Todos los titulos que comienzan con A
+select * from libros where autor like "%Carrol_"; El _ sirve como comodin de caracter, puede ser nulo
+select * from libros where titulo like "%PHP%";
+select * from libros where titulo not like "Harry Potter%";
+
+-Otro tipo de busqueda de patrones se busca (regexp, not regexp), mucho más especifico. Googlear si es necesario utilizar.
+
+-Contar registros dependiendo alguna caracteristica (count)
+select count(*) form libros; cuenta todos los registros;
+select count(*) from libros where editorial="Planeta";
+select count(*) from libros where autor like "%Borges%";
+select count(precio) from libros; Todos los que tengan precios, no nulos;
+
+-Funciones de agrupamiento (count-max.min.sum.avg), permiten contar registros, calcular sumas, promedios, obtener, valores minimos y maximos.
+select sum(cantidad)from libros; suma todas las cantidades de libros.
+select sum(cantidad) from libros where editorial="Planeta";
+select max(precio) from libros; Busca el libro mas costoso;
+select min(precio) from libros where autor like "%Rowling%"; El libro más barato de Rowling;
+select avg(precio) from libros where titulo like "%PHP%"; promedio de precios de los libros referentes a "PHP".
+
+---- llegue hasta el video 32: agrupar registros group by ----
+
+- alter table - sirve para modificar tablas
+Permite agregar, eliminar, modificar, agregar, cambiar o renombrar campos
